@@ -1,3 +1,6 @@
+# Add an executable.
+#
+# 添加一个可执行程序。
 function(cmk_add_executable)
 
     # cmk_add_executable(<target>
