@@ -1,1 +1,1 @@
-# cmk
+# cmk - CMake Modules Collection
