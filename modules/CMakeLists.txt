@@ -1,0 +1,4 @@
+include(cmk_add_executable)
+include(cmk_get_relative_path)
+include(cmk_sc_add_rel_pth_exe)
+include(cmk_set_system_name)
