@@ -1,0 +1,5 @@
+@PACKAGE_INIT@
+
+list(APPEND CMAKE_MODULE_PATH @PACKAGE_CMK_INSTALL_SHARE_DIR@/modules)
+
+include(cmk_include_all_modules)
