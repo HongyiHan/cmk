@@ -9,9 +9,13 @@ include(${CMAKE_CURRENT_LIST_DIR}/cmk_get_relative_path.cmake)
 # exe - executable
 #
 # 添加一个可执行程序，其最终的目标名称是由 一个相对路径 和 调用者传入的名称 组合而成，以保证目标名称的唯一性。
-#   1. 获取从 ${PROJECT_SOURCE_DIR} 到 ${CMAKE_CURRENT_SOURCE_DIR} 的相对路径
-#   2. 将相对路径中的 '/' 替换为 '__' 得到目标名称的前缀
-#   3. 最终的目标名称为：目标名称的前缀 + '__' + 调用者传入的名称
+# 1. 最终的目标名称
+#   a. 获取从 ${PROJECT_SOURCE_DIR} 到 ${CMAKE_CURRENT_SOURCE_DIR} 的相对路径
+#   b. 将相对路径中的 '/' 替换为 '__' 得到目标名称的前缀
+#   c. 最终的目标名称为：目标名称的前缀 + '__' + 调用者传入的名称
+# 2. 默认的源文件
+#   a. ${target}.c
+#   b. ${target}.cpp
 function(cmk_sc_add_rel_pth_exe)
 
     # cmk_sc_add_rel_pth_exe(<target>
@@ -37,7 +41,13 @@ function(cmk_sc_add_rel_pth_exe)
     list(APPEND TARGET_SOURCE_FILES ${ARG_SOURCE_FILES} ${ARG_UNPARSED_ARGUMENTS})
     list(LENGTH TARGET_SOURCE_FILES TARGET_SOURCE_FILES_LENGTH)
     if(NOT TARGET_SOURCE_FILES_LENGTH)
-        list(APPEND TARGET_SOURCE_FILES ${ARG_TARGET}.cpp)
+        if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_TARGET}.c)
+            list(APPEND TARGET_SOURCE_FILES ${ARG_TARGET}.c)
+        elseif(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ARG_TARGET}.cpp)
+            list(APPEND TARGET_SOURCE_FILES ${ARG_TARGET}.cpp)
+        else()
+            message(FATAL_ERROR "Default source file not found for target ${ARG_TARGET}.")
+        endif()
     endif()
 
     cmk_add_executable(${TARGET_FULL_NAME}
