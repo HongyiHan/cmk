@@ -3,7 +3,9 @@
 # 输出变量 ${OUTPUT_VARIABLE} 将返回一个 相对路径字符串，该值指明从 ${PROJECT_SOURCE_DIR} 到 ${CMAKE_CURRENT_SOURCE_DIR} 的相对路径。
 function(cmk_get_relative_path OUTPUT_VARIABLE)
 
-    string(LENGTH ${PROJECT_SOURCE_DIR} TOP_DIR_ABS_PTH_LEN)
+    get_filename_component(TOP_DIR_ABS_PTH ${PROJECT_SOURCE_DIR} DIRECTORY)
+
+    string(LENGTH ${TOP_DIR_ABS_PTH} TOP_DIR_ABS_PTH_LEN)
 
     math(EXPR TOP_DIR_ABS_PTH_LEN_ADD_ONE "${TOP_DIR_ABS_PTH_LEN} + 1")
 

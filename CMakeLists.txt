@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(
     cmk
-    VERSION 0.0.0
+    VERSION 0.0.1
     DESCRIPTION "CMake Modules Collection"
 )
 
