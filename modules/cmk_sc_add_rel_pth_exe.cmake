@@ -1,5 +1,5 @@
-include(cmk_add_executable.cmake)
-include(cmk_get_relative_path.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/cmk_add_executable.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/cmk_get_relative_path.cmake)
 
 # Add an executable with a specific target name which is generated from its relative path.
 #

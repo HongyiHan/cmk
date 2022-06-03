@@ -2,12 +2,11 @@ cmake_minimum_required(VERSION 3.16.3)
 
 project(
     cmk
-    VERSION 0.0.1
+    VERSION 0.0.2
     DESCRIPTION "CMake Modules Collection"
 )
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/modules)
-include(cmk_set_system_name)
+include(modules/cmk_set_system_name.cmake)
 cmk_set_system_name()
 
 if(Linux)
