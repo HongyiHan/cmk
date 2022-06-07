@@ -1,3 +1,5 @@
 @PACKAGE_INIT@
 
 include(${CMAKE_CURRENT_LIST_DIR}/modules/cmk_include_all_modules.cmake)
+
+cmk_set_system_name()
