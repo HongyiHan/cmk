@@ -20,12 +20,13 @@ function(cmk_sc_add_rel_pth_exe)
 
     # cmk_sc_add_rel_pth_exe(<target_hint>                      input
     #                        <source>...                        input
+    #                        [EXCLUDE_FROM_ALL]                 input
     #                        [OUTPUT_NAME <name>]               input
     #                        [LINK_LIBRARIES <library>...]      input
     #                        [SOURCE_FILES <source>...]         input
     #                        [TARGET_NAME <name>])              output
     set(ARG_TARGET_HINT ${ARGV0})
-    set(options)
+    set(options EXCLUDE_FROM_ALL)
     set(oneValueArgs OUTPUT_NAME TARGET_NAME)
     set(multiValueArgs LINK_LIBRARIES SOURCE_FILES)
     cmake_parse_arguments(PARSE_ARGV 1 "ARG" "${options}" "${oneValueArgs}" "${multiValueArgs}")
@@ -51,7 +52,12 @@ function(cmk_sc_add_rel_pth_exe)
         endif()
     endif()
 
+    if(ARG_EXCLUDE_FROM_ALL)
+        set(ARG_EXCLUDE_FROM_ALL EXCLUDE_FROM_ALL)
+    endif()
+
     cmk_add_executable(${TARGET_NAME}
+                       ${ARG_EXCLUDE_FROM_ALL}
                        OUTPUT_NAME ${TARGET_OUTPUT_NAME}
                        SOURCE_FILES ${TARGET_SOURCE_FILES}
                        LINK_LIBRARIES ${ARG_LINK_LIBRARIES})
